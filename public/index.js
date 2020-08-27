@@ -1,8 +1,8 @@
 console.log('Hello consol!');
 var capture;
-var buttonTirarFoto;
-var buttonSalvarFoto;
-var fotoTirada;
+var button_take_snap;
+var button_save_snap;
+var image_capture;
 var modo = 0;
 var confirmarTakeSnap = false;
 var lat=0;
@@ -21,14 +21,14 @@ function setup()
   capture = createCapture(VIDEO);
   capture.hide();
   
-  buttonTirarFoto = createButton("Take Snap!");
-  buttonTirarFoto.position(width/2-70, height - 60); 
-  buttonTirarFoto.mousePressed(takeSnap);
+  button_take_snap = createButton("Take Snap!");
+  button_take_snap.position(width/2-70, height - 60); 
+  button_take_snap.mousePressed(takeSnap);
   
-  buttonSalvarFoto = createButton("Save the image!");
-  buttonSalvarFoto.position(width/2 - 120, height - 60);
-  buttonSalvarFoto.hide();
-  buttonSalvarFoto.mousePressed(saveSnap);
+  button_save_snap = createButton("Save the image!");
+  button_save_snap.position(width/2 - 120, height - 60);
+  button_save_snap.hide();
+  button_save_snap.mousePressed(saveSnap);
    
 
    //capture.hide();
@@ -55,7 +55,7 @@ function draw() {
     image(capture, width/2 + 25, 0);   
   }else if(modo == 1){
     background(255);
-    image(fotoTirada, 0, 0, width, height);
+    image(image_capture, 0, 0, width, height);
     saveCanvas("minhaFoto", "jpg");
     background(255);
     modo = 0;
@@ -63,14 +63,12 @@ function draw() {
 }
 
 function takeSnap(){
- tint(255);
+ tint(255); //It can be used to tint an image with the
+ // specified color or make it transparent by using an alpha value.
  image(capture, 20, 0);
  fotoTirada = capture.get();
  image(fotoTirada, 20, 0);
- 
- //Tive que usar esse codigo abaixo anteriormente para a camera não travar ao usar o capture.get().
-// capture = createCapture(VIDEO); consegui evitar de usar esse codigo que suja cada vez mais o html com novas tags de video
- //capture.hide(); colocando o tint ali em cima.
+
  
  confirmarTakeSnap = true;
 }
